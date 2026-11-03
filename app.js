@@ -14,18 +14,28 @@ const BASE_URL = "https://lldev.thespacedevs.com/2.3.0";
 // - Parses the response
 // - Calls the callback function and passes the results array
 function getUpcomingLaunches() {
+  // Get the status element
+  const status = document.getElementById("status");
+
+  // Show loading message
+  status.textContent = "Loading...";
+
   // Request upcoming launches using Axios
   axios.get(BASE_URL + "/launches/upcoming/")
     .then(function (response) {
-      // Get the launches array from the response
+      // Get the launches array
       const launches = response.data.results;
 
       // Populate the dropdown
       populateDropdown(launches);
+
+      // Clear the loading message
+      status.textContent = "";
     })
     .catch(function (error) {
-      // Display the error in the console
-      console.error("Error fetching launches:", error.message);
+      // Display an error message
+      status.textContent =
+        "Error loading upcoming launches: " + error.message;
     });
 }
 
@@ -56,30 +66,40 @@ function populateDropdown(launches) {
 // - On change, get the selected launch ID
 // - Call getLaunchDetails(launchId, callback)
 document.getElementById("launchDropdown").addEventListener("change", function () {
-    // Get the selected launch ID
-    const launchId = this.value;
+  // Get the selected launch ID
+  const launchId = this.value;
 
-    // Request the selected launch details
-    getLaunchDetails(launchId);
+  // Request the selected launch details
+  getLaunchDetails(launchId);
 });
 
 // Step 4: Create getLaunchDetails(launchId, callback)
 // - Makes a GET request to BASE_URL + "/launches/" + launchId + "/"
 // - Parses the response and passes the launch object to the callback
 function getLaunchDetails(launchId) {
-    // Request details for the selected launch
-    axios.get(BASE_URL + "/launches/" + launchId + "/")
-        .then(function (response) {
-            // Get the launch object
-            const launch = response.data;
+  // Get the status element
+  const status = document.getElementById("status");
 
-            // Display the mission details and rocket
-            displayLaunchInfo(launch);
-        })
-        .catch(function (error) {
-            // Display the error in the console
-            console.error("Error fetching launch details:", error.message);
-        });
+  // Show loading message
+  status.textContent = "Loading...";
+
+  // Request the selected launch details
+  axios.get(BASE_URL + "/launches/" + launchId + "/")
+    .then(function (response) {
+      // Get the launch object
+      const launch = response.data;
+
+      // Display the launch information
+      displayLaunchInfo(launch);
+
+      // Clear the loading message
+      status.textContent = "";
+    })
+    .catch(function (error) {
+      // Display an error message
+      status.textContent =
+        "Error loading launch details: " + error.message;
+    });
 }
 
 // Step 5: Create displayLaunchInfo(launch)

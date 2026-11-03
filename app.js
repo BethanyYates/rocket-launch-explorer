@@ -121,7 +121,54 @@ function displayLaunchInfo(launch) {
   // TODO: Display mission name and description
   // TODO: Display the rocket image
 
-  console.log(launch);
+      // Get the HTML elements
+    const missionDetails = document.getElementById("missionDetails");
+    const rocketContainer = document.getElementById("rocket");
+
+    // Clear the previous launch information
+    missionDetails.textContent = "";
+    rocketContainer.textContent = "";
+
+    // Create and display the launch name
+    const missionName = document.createElement("h2");
+    missionName.textContent = launch.name;
+
+    missionDetails.appendChild(missionName);
+
+    // Create and display the mission description
+    const missionDescription = document.createElement("p");
+
+    if (launch.mission && launch.mission.description) {
+        missionDescription.textContent = launch.mission.description;
+    } else {
+        missionDescription.textContent = "No mission description available.";
+    }
+
+    missionDetails.appendChild(missionDescription);
+
+    // Check if a rocket image is available
+    if (
+        launch.rocket &&
+        launch.rocket.configuration &&
+        launch.rocket.configuration.image &&
+        launch.rocket.configuration.image.image_url
+    ) {
+        // Create the rocket image
+        const rocketImage = document.createElement("img");
+
+        // Set the image source and alternative text
+        rocketImage.src = launch.rocket.configuration.image.image_url;
+        rocketImage.alt = "Rocket image for " + launch.name;
+
+        // Add the image to the webpage
+        rocketContainer.appendChild(rocketImage);
+    } else {
+        // Display a message if no image exists
+        const noImage = document.createElement("p");
+        noImage.textContent = "No rocket image available.";
+
+        rocketContainer.appendChild(noImage);
+    }
 }
 
 // Final step: kick off the flow

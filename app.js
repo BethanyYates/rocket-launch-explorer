@@ -14,7 +14,31 @@ const BASE_URL = "https://lldev.thespacedevs.com/2.3.0";
 // - Parses the response
 // - Calls the callback function and passes the results array
 function getUpcomingLaunches(callback) {
-  // TODO: Implement XHR GET request
+  // Create a new XMLHttpRequest object
+  const xhr = new XMLHttpRequest();
+
+  // Set up the GET request
+  xhr.open("GET", BASE_URL + "/launches/upcoming/", true);
+
+  // Handle the response
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // Convert JSON response into JavaScript data
+        const data = JSON.parse(xhr.responseText);
+
+        // Pass the launches array to the callback
+        callback(data.results);
+      } else {
+        console.error(
+          "Error fetching launches: " + xhr.status
+        );
+      }
+    }
+  };
+
+  // Send the request
+  xhr.send();
 }
 
 // Step 2: Create populateDropdown(launches)
@@ -22,6 +46,7 @@ function getUpcomingLaunches(callback) {
 // - Adds one <option> per launch: text = launch name, value = launch id
 function populateDropdown(launches) {
   // TODO: Iterate and append <option> elements
+  console.log(launches);
 }
 
 // Step 3: Add event listener to #launchDropdown

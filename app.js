@@ -46,6 +46,7 @@ function getUpcomingLaunches(callback) {
 // - Adds one <option> per launch: text = launch name, value = launch id
 function populateDropdown(launches) {
   // TODO: Iterate and append <option> elements
+
   // Get the dropdown element
   const dropdown = document.getElementById("launchDropdown");
 
@@ -71,6 +72,12 @@ function populateDropdown(launches) {
 document.getElementById("launchDropdown").addEventListener("change", function () {
   // TODO: Get selected launchId
   // TODO: Call getLaunchDetails
+
+  // Get the selected launch ID
+  const launchId = this.value;
+
+  // Request details for the selected launch
+  getLaunchDetails(launchId, displayLaunchInfo);
 });
 
 // Step 4: Create getLaunchDetails(launchId, callback)
@@ -78,6 +85,32 @@ document.getElementById("launchDropdown").addEventListener("change", function ()
 // - Parses the response and passes the launch object to the callback
 function getLaunchDetails(launchId, callback) {
   // TODO: Implement XHR GET request for a single launch
+
+  // Create a new XMLHttpRequest object
+  const xhr = new XMLHttpRequest();
+
+  // Set up the GET request for the selected launch
+  xhr.open("GET", BASE_URL + "/launches/" + launchId + "/", true);
+
+  // Handle the API response
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // Convert the JSON response to a JavaScript object
+        const launch = JSON.parse(xhr.responseText);
+
+        // Pass the launch object to the callback
+        callback(launch);
+      } else {
+        console.error(
+          "Error fetching launch details: " + xhr.status
+        );
+      }
+    }
+  };
+
+  // Send the request
+  xhr.send();
 }
 
 // Step 5: Create displayLaunchInfo(launch)
@@ -87,6 +120,8 @@ function getLaunchDetails(launchId, callback) {
 function displayLaunchInfo(launch) {
   // TODO: Display mission name and description
   // TODO: Display the rocket image
+
+  console.log(launch);
 }
 
 // Final step: kick off the flow

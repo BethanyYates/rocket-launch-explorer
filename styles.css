@@ -1,2 +1,251 @@
-/* Part 3: Add custom styling here (colors, fonts, layout, spacing).
-   The starter provides no styles. */
+/* ==========================================
+   Rocket Launch Explorer
+   Step 8: Custom CSS Styling
+   ========================================== */
+
+/* General page styling */
+* {
+   box-sizing: border-box;
+}
+
+body {
+   margin: 0;
+   padding: 30px 20px;
+   min-height: 100vh;
+
+   font-family: Arial, Helvetica, sans-serif;
+   line-height: 1.6;
+
+   background: linear-gradient(135deg,
+         #0b1930,
+         #17365d,
+         #245681);
+
+   color: #1e293b;
+}
+
+/* Main heading */
+h1 {
+   max-width: 900px;
+   margin: 20px auto 30px;
+
+   color: #ffffff;
+   font-size: 2.5rem;
+   font-weight: bold;
+   text-align: center;
+
+   letter-spacing: 1px;
+}
+
+/* Upcoming launches label */
+label {
+   display: block;
+   max-width: 800px;
+   margin: 0 auto 10px;
+
+   color: #ffffff;
+   font-size: 1.1rem;
+   font-weight: bold;
+}
+
+/* Launch dropdown */
+#launchDropdown {
+   display: block;
+   width: 100%;
+   max-width: 800px;
+
+   margin: 0 auto 20px;
+   padding: 15px;
+
+   background-color: #ffffff;
+   color: #1e293b;
+
+   border: 2px solid #93c5fd;
+   border-radius: 10px;
+
+   font-size: 1rem;
+   cursor: pointer;
+
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown hover effect */
+#launchDropdown:hover {
+   border-color: #38bdf8;
+}
+
+/* Keyboard accessibility */
+#launchDropdown:focus {
+   outline: 3px solid #7dd3fc;
+   outline-offset: 3px;
+}
+
+/* Loading and error messages */
+#status {
+   max-width: 800px;
+   margin: 10px auto 20px;
+
+   color: #ffffff;
+   font-size: 1rem;
+   font-weight: bold;
+   text-align: center;
+}
+
+/* Hide the status area when empty */
+#status:empty {
+   display: none;
+}
+
+/* Mission details card */
+#missionDetails {
+   max-width: 800px;
+   margin: 20px auto 0;
+   padding: 25px;
+
+   background-color: #ffffff;
+   border-radius: 15px 15px 0 0;
+
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Mission heading */
+#missionDetails h2 {
+   margin: 0 0 15px;
+
+   color: #0f2747;
+   font-size: 1.7rem;
+
+   border-bottom: 2px solid #bfdbfe;
+   padding-bottom: 10px;
+}
+
+/* Mission description */
+#missionDetails p {
+   margin: 0;
+
+   color: #475569;
+   font-size: 1rem;
+   line-height: 1.8;
+   overflow-wrap: anywhere;
+}
+
+/* Rocket image container */
+#rocket {
+   max-width: 800px;
+   margin: 0 auto 30px;
+   padding: 0 25px 25px;
+
+   background-color: #ffffff;
+   border-radius: 0 0 15px 15px;
+
+   text-align: center;
+
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Rocket image styling */
+#rocket img {
+   display: block;
+
+   width: 100%;
+   max-width: 600px;
+   height: auto;
+
+   margin: 0 auto;
+
+   border-radius: 10px;
+   border: 2px solid #e2e8f0;
+
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Missing rocket image message */
+#rocket p {
+   margin: 0;
+   padding: 15px;
+
+   color: #64748b;
+   font-style: italic;
+
+   background-color: #f1f5f9;
+   border-radius: 8px;
+}
+
+/* Hide empty cards before selecting a launch */
+#missionDetails:empty,
+#rocket:empty {
+   display: none;
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+
+/* Tablets and smaller screens */
+@media (max-width: 768px) {
+   body {
+      padding: 20px 15px;
+   }
+
+   h1 {
+      font-size: 2rem;
+   }
+
+   #launchDropdown {
+      font-size: 0.95rem;
+      padding: 12px;
+   }
+
+   #missionDetails {
+      padding: 20px;
+   }
+
+   #rocket {
+      padding: 0 20px 20px;
+   }
+
+   #missionDetails h2 {
+      font-size: 1.4rem;
+   }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+   body {
+      padding: 15px 10px;
+   }
+
+   h1 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+   }
+
+   label {
+      font-size: 1rem;
+   }
+
+   #launchDropdown {
+      font-size: 0.9rem;
+      padding: 10px;
+   }
+
+   #missionDetails {
+      padding: 15px;
+   }
+
+   #rocket {
+      padding: 0 15px 15px;
+   }
+
+   #missionDetails h2 {
+      font-size: 1.2rem;
+   }
+
+   #missionDetails p {
+      font-size: 0.95rem;
+   }
+
+   #rocket img {
+      max-width: 100%;
+   }
+}
